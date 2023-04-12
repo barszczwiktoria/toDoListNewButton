@@ -1,5 +1,6 @@
 {
     const tasks = [];
+let HideDoneTasks = false;
 
     const addNewTask = (newTaskContent) => {
         tasks.push({

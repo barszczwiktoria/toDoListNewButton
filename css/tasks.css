@@ -1,15 +1,15 @@
 .tasks {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0px;
 }
 
 .tasks__item {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    grid-gap: 15 px;
+    grid-gap: 15px;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 

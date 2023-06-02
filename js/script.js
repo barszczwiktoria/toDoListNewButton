@@ -1,16 +1,20 @@
 {
-    const tasks = [];
-let HideDoneTasks = false;
+    let tasks = [];
+    let hideTaskDone = false;
 
     const addNewTask = (newTaskContent) => {
-        tasks.push({
-            content: newTaskContent
-        });
+        tasks = [
+            ...tasks,
+            { content: newTaskContent },
+        ];
         render();
     };
 
     const removeTask = (taskIndex) => {
-        tasks.splice(taskIndex, 1);
+        tasks = [
+            ...tasks.slice(0,taskIndex),
+            ...tasks.slice(taskIndex +1),
+        ];
         render();
     };
 
@@ -39,25 +43,33 @@ let HideDoneTasks = false;
         });
     }
 
-    const render = () => {
+    const renderTasks = () => {
         let htmlString = "";
 
         for (const task of tasks) {
             htmlString += `
             <li class="tasks__item js-tasks"> 
-            <button class="tasks__button tasks__button--toggleDone js-toggleDone">
-            ${task.done ? "✓" : ""}
-            </button>
-           <span class="tasks__content ${task.done ? "tasks__content--done" : ""}">
-            ${task.content}</span>
-            <button class="tasks__button tasks__button--remove js-remove"> 
-            🗑
-            </button>
+                <button class="tasks__button tasks__button--toggleDone js-toggleDone">
+                    ${task.done ? "✓" : ""}
+                </button>
+                <span class="tasks__content ${task.done ? "tasks__content--done" : ""}">
+                    ${task.content}
+                </span>
+                <button class="tasks__button tasks__button--remove js-remove"> 
+                    🗑
+                </button>
             </li>
-            `;
+        `;
         }
 
         document.querySelector(".js-tasks").innerHTML = htmlString;
+    };
+
+    const renderButtons = () => { };
+
+    const render = () => {
+        renderTasks();
+        renderButtons();
 
         bindRemoveTaskEvents();
         bindToggleDoneEvents();
@@ -81,7 +93,6 @@ let HideDoneTasks = false;
         const form = document.querySelector(".js-form");
         form.addEventListener("submit", onFormSubmit);
 
-        addNewTask(newTaskContent);
     };
 
     init();
